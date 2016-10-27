@@ -38,6 +38,53 @@ public class ImageGen implements IGenInterface
 		return matrix;
 	}
 	
+	@Override
+	public PixelMatrix CreateImage(int x, int y, IManipulator[] m)
+	{
+		long startTime = Timer.start();
+		PixelMatrix matrix = new PixelMatrix(x, y);
+		double min = Integer.MAX_VALUE, max = Integer.MIN_VALUE;
+		
+		for(int channel = 0; channel < 3; channel++)
+		{
+			for(int dimY = 0; dimY < y; dimY++)
+			{
+				for(int dimX = 0; dimX < x; dimX++)
+				{
+					Pixel p = new Pixel(m[channel].manipulate(dimX, dimY));
+					if(p.magnitude() > max) max = p.magnitude();
+					if(p.magnitude() < min) min = p.magnitude();
+					matrix.set(dimY, dimX, p);
+				}
+			}
+		}
+		
+		matrix = ScaleImage(matrix, min, max);
+		long totalTime = Timer.stop(startTime);
+		
+		System.out.println(" CREATED in "+totalTime+" milliseconds.");
+		System.out.println("MIN is "+min+", MAX is "+max);
+		return matrix;
+	}
+	
+	@Override
+	public boolean Validate(int x, int y, IManipulator m)
+	{
+		for(int dimY = 0; dimY < y; dimY++)
+		{
+			for(int dimX = 0; dimX < x; dimX++)
+			{
+				try {
+					m.manipulate(dimX, dimY);
+				} catch(Exception ex) {
+					return false;
+				}
+			}
+		}
+		
+		return true;
+	}
+	
 	private PixelMatrix ScaleImage(PixelMatrix m, double min, double max)
 	{
 		long startTime = Timer.start();

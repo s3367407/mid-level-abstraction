@@ -58,6 +58,37 @@ public class PixelMatrix
 		}
 	}
 	
+	public void set(int y, int x, short a, int colourChannel)
+	{
+		switch(colourChannel)
+		{
+			case 0: 
+				setR(y, x, a); 
+				break;
+			case 1: 
+				setG(y, x, a); 
+				break;
+			case 2: 
+				setB(y, x, a); 
+				break;
+		}
+	}
+	
+	private void setR(int y, int x, short r)
+	{
+		matrix[y][x].setR(r);
+	}
+	
+	private void setG(int y, int x, short g)
+	{
+		matrix[y][x].setR(g);
+	}
+	
+	private void setB(int y, int x, short b)
+	{
+		matrix[y][x].setR(b);
+	}
+	
 	public void print()
 	{
 		for(int i = 0; i < matrix[0].length; i++)

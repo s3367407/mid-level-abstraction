@@ -107,6 +107,13 @@ public class ArithmeticNode extends ParserNode {
 		return this.operation(XPixel, YPixel, COLOR_TYPE.ALL);
 	}
 	
+	public double operation(int xValue, int yValue) {
+		PixelNode xPixelValues = new PixelNode(xValue, 0, 0);
+		PixelNode yPixelValues = new PixelNode(yValue, 0, 0);
+		
+		return this.operation(xPixelValues, yPixelValues, COLOR_TYPE.RED).getRedColor();
+	}
+	
 	// This function completes this Nodes arithmetic on the supplied
 	// Pixel values. It returns a PixelNode object which contains
 	// a red, green and blue value.

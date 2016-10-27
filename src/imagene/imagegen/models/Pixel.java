@@ -71,4 +71,19 @@ public class Pixel
 	{
 		return (short)Math.round(a);
 	}
+	
+	public void setR(short r)
+	{
+		this.r = r;
+	}
+	
+	public void setG(short g)
+	{
+		this.g = g;
+	}
+	
+	public void setB(short b)
+	{
+		this.b = b;
+	}
 }

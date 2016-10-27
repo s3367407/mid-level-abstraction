@@ -19,7 +19,7 @@ public class Main {
 	
     public static void main(String [] args)
     {
-    	ivm = new ImageneViewModel();
+    	ivm = new ImageneViewModel(4);
     	
         SwingUtilities.invokeLater(new Runnable() {
             @Override
